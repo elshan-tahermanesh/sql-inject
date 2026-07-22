@@ -883,5 +883,4 @@ Before reusing or redistributing the source code, review the repository's licens
     View the sql-inject repository on GitHub
   </a>
 </p>
-#   s q l - i n j e c t  
- 
+#
