@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline — SQL Injection Sandbox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyber-black: #050810;
+      --cyber-card: #0d1526;
+      --cyber-border: #1a2a4a;
+      --cyber-blue: #1a6aff;
+      --cyber-blue-light: #4d8fff;
+      --font-sans: 'Rajdhani', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--cyber-black);
+      color: #c8d8f0;
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .panel {
+      background: var(--cyber-card);
+      border: 1px solid var(--cyber-border);
+      border-radius: 12px;
+      padding: 40px 30px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 35px rgba(26, 106, 255, 0.05);
+    }
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyber-blue), transparent);
+    }
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    h1 {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    p {
+      color: #5a7a9a;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--cyber-blue);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+      box-shadow: 0 0 15px rgba(26, 106, 255, 0.25);
+    }
+    .btn:hover {
+      background: var(--cyber-blue-light);
+      transform: translateY(-1px);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="icon">🔌</div>
+    <h1>Connection Lost</h1>
+    <p>
+      You are currently offline. However, the core SQL Injection dashboard and simulated attack sandboxes are fully pre-cached and capable of running entirely without network access!
+    </p>
+    <a href="/" class="btn">Return to Sandbox</a>
+  </div>
+</body>
+</html>

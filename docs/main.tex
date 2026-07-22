@@ -1,0 +1,1272 @@
+\documentclass[12pt,a4paper]{article}
+
+% ============================================================
+% Packages
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{pifont}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ============================================================
+% Page layout and typography
+% ============================================================
+\geometry{
+    top=2.4cm,
+    bottom=2.4cm,
+    left=2.5cm,
+    right=2.5cm
+}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+% ============================================================
+% Colors
+% ============================================================
+\definecolor{CyberBlue}{HTML}{1A6AFF}
+\definecolor{CyberDark}{HTML}{101722}
+\definecolor{CyberGray}{HTML}{5A6B7D}
+\definecolor{CyberLight}{HTML}{EEF4FF}
+\definecolor{CyberRed}{HTML}{D62828}
+\definecolor{CyberGreen}{HTML}{168A45}
+\definecolor{CodeBackground}{HTML}{F5F7FA}
+\definecolor{CodeBorder}{HTML}{D8DEE8}
+\definecolor{CodeKeyword}{HTML}{7A3E9D}
+\definecolor{CodeString}{HTML}{1A7F37}
+\definecolor{CodeComment}{HTML}{6E7781}
+
+% ============================================================
+% Hyperlinks
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=CyberBlue,
+    urlcolor=CyberBlue,
+    citecolor=CyberBlue,
+    pdftitle={SQL Injection Demonstration Project Documentation},
+    pdfauthor={Group C},
+    pdfsubject={Cybersecurity Course Project},
+    pdfkeywords={SQL Injection, Cybersecurity, React, Flask, Docker, SQLite}
+}
+
+% ============================================================
+% Header and footer
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small SQL Injection Demonstration Project}
+\fancyhead[R]{\small Group C}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{15pt}
+
+% ============================================================
+% Section styling
+% ============================================================
+\titleformat{\section}
+  {\Large\bfseries\color{CyberDark}}
+  {\thesection}{0.75em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{CyberBlue}}
+  {\thesubsection}{0.75em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{CyberDark}}
+  {\thesubsubsection}{0.75em}{}
+
+% ============================================================
+% Listings configuration
+% ============================================================
+\lstdefinestyle{codeStyle}{
+    backgroundcolor=\color{CodeBackground},
+    frame=single,
+    rulecolor=\color{CodeBorder},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{CodeKeyword}\bfseries,
+    stringstyle=\color{CodeString},
+    commentstyle=\color{CodeComment}\itshape,
+    numbers=left,
+    numberstyle=\tiny\color{CyberGray},
+    numbersep=8pt,
+    breaklines=true,
+    breakatwhitespace=false,
+    showstringspaces=false,
+    tabsize=2,
+    captionpos=b,
+    columns=fullflexible,
+    keepspaces=true
+}
+\lstset{style=codeStyle}
+
+% ============================================================
+% Custom commands
+% ============================================================
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\good}{\textcolor{CyberGreen}{\ding{51}}}
+\newcommand{\bad}{\textcolor{CyberRed}{\ding{55}}}
+\newcommand{\projectname}{SQL\_INJECT}
+\newcommand{\screenshot}[3]{%
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2\textwidth]{#1}
+    \caption{#3}
+\end{figure}}
+
+\begin{document}
+
+% ============================================================
+% Cover Page
+% ============================================================
+\begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+
+    \vspace*{1.2cm}
+
+    {\Large University of Rostock\par}
+    \vspace{0.3cm}
+    {\large Institute of Computer Science\par}
+
+    \vspace{2.0cm}
+
+    {\color{CyberBlue}\rule{0.85\textwidth}{1.5pt}\par}
+    \vspace{0.55cm}
+    {\Huge\bfseries SQL Injection Demonstration Project\par}
+    \vspace{0.4cm}
+    {\LARGE\color{CyberGray}Technical Documentation\par}
+    \vspace{0.55cm}
+    {\color{CyberBlue}\rule{0.85\textwidth}{1.5pt}\par}
+
+    \vspace{1.7cm}
+
+    {\Large Cybersecurity Course Project\par}
+    \vspace{0.4cm}
+    {\large Group C\par}
+
+    \vspace{1.6cm}
+
+    \begin{tabular}{>{\bfseries}r l}
+        Team Members: & Elshan Tahermanesh \\
+                      & Ashwin Kumar Selvavinayagam \\
+                      & Matthias Losch \\
+                      & Muska Ijaz \\
+                      & Surbhi Mehto \\
+                      & Pratham Tatraiya \\
+                      & Pauline Meuer \\
+    \end{tabular}
+
+    \vspace{1.5cm}
+
+    \begin{tabular}{>{\bfseries}r l}
+        Instructor: & Prof. Dr. Clemens Cap \\
+        Project Type: & Educational Cybersecurity Laboratory \\
+        Technology Stack: & React, Flask, SQLite, Docker \\
+    \end{tabular}
+
+    \vfill
+
+    {\large July 2026\par}
+\end{titlepage}
+
+% ============================================================
+% Front matter
+% ============================================================
+\pagenumbering{roman}
+
+\section*{Declaration of Educational Purpose}
+\addcontentsline{toc}{section}{Declaration of Educational Purpose}
+
+This project was created exclusively for teaching, demonstration, and controlled laboratory use. It illustrates how SQL injection vulnerabilities can arise, how they can be recognized, and how secure implementations prevent them. The attack modules intentionally restrict execution to loopback or private network targets. Public Internet scanning is disabled. The destructive \code{DROP TABLE} demonstration is implemented as a non-destructive capability check and does not transmit or execute the destructive statement.
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+The \projectname{} project is an interactive web-based laboratory for demonstrating common SQL injection techniques. It combines a React single-page application with a Flask backend and a small SQLite database. The frontend provides instructional pages, a payload library, attack configuration forms, animated terminal output, result summaries, and local test logs. The backend exposes health, authentication, demonstration, and attack-execution endpoints. Six attack categories are represented: classic tautology injection, login bypass, UNION-based extraction, Boolean-based blind injection, SQL comment injection, and a safe DROP TABLE vulnerability demonstration.
+
+The system is designed around a separate intentionally vulnerable target application, referred to in the project as the Golimar Store. The attack service sends controlled HTTP requests to this local target, analyzes the responses, and returns structured findings to the frontend. Safety controls include private-address validation, Docker-aware loopback translation, request timeouts, and non-destructive handling of destructive payloads. This document describes the motivation, requirements, architecture, implementation, attack scenarios, secure coding principles, deployment process, testing strategy, limitations, and future work of the project.
+
+\textbf{Keywords:} SQL injection, web security, React, Flask, SQLite, Docker, cybersecurity education, secure coding.
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\pagenumbering{arabic}
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+\subsection{Background}
+
+SQL injection is a class of application-layer vulnerability in which untrusted input is interpreted as part of an SQL command. The vulnerability normally appears when an application constructs a database query by concatenating user-controlled values directly into the SQL statement. An attacker can then alter the intended meaning of the query, bypass access controls, disclose records, modify data, or, in severe cases, execute destructive database operations.
+
+Although parameterized queries are a well-established defense, SQL injection remains important in cybersecurity education because it demonstrates the relationship between input handling, application logic, database syntax, authentication, and system trust boundaries. A practical laboratory makes these relationships easier to understand than static examples alone.
+
+\subsection{Project Motivation}
+
+The project was developed to provide an understandable and visually guided environment in which students can:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item configure a local target URL and select a predefined payload;
+    \item observe DNS resolution, TCP connectivity, HTTP execution, and response analysis;
+    \item compare different SQL injection techniques;
+    \item understand the difference between vulnerable query construction and parameterized queries;
+    \item study attack indicators without targeting public systems;
+    \item present each attack scenario during a cybersecurity course demonstration.
+\end{itemize}
+
+\subsection{Project Objectives}
+
+The primary objectives are:
+
+\begin{enumerate}[leftmargin=1.4cm]
+    \item Build a modular web interface for SQL injection education.
+    \item Implement six clearly separated attack demonstrations.
+    \item Execute controlled HTTP-based checks against a local vulnerable application.
+    \item Display realistic terminal-style progress and result information.
+    \item Store test history locally in the browser for later review.
+    \item demonstrate secure authentication through parameterized SQLite queries.
+    \item provide Docker-based setup for repeatable execution.
+    \item prevent scanning of arbitrary public Internet targets.
+    \item ensure the destructive demonstration remains non-destructive.
+\end{enumerate}
+
+\subsection{Scope}
+
+The project focuses on SQL injection awareness and demonstration. It is not a full penetration-testing framework and is not intended to replace professional scanners. The implemented scanner modules test one supplied payload at a time and interpret application-specific response signals. The vulnerable target application is expected to run locally, normally on port \code{2000}, while the educational frontend and Flask attack API run on ports \code{3000} and \code{5000} respectively.
+
+% ============================================================
+\section{Requirements Analysis}
+% ============================================================
+
+\subsection{Functional Requirements}
+
+\begin{longtable}{p{1.8cm}p{11.8cm}}
+\caption{Functional requirements}\label{tab:functional-requirements}\\
+\toprule
+\textbf{ID} & \textbf{Requirement} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requirement} \\
+\midrule
+\endhead
+FR-01 & The system shall provide a login/entry page and navigation to the main modules. \\
+FR-02 & The system shall provide pages for Home, Instructions, Attacks, Payload Library, and Logs. \\
+FR-03 & The system shall provide interactive modules for classic, login bypass, UNION, blind, comment, and DROP TABLE attack scenarios. \\
+FR-04 & The user shall be able to enter a target URL and SQL payload. \\
+FR-05 & The system shall provide predefined local-lab presets. \\
+FR-06 & The frontend shall send attack requests to the Flask API. \\
+FR-07 & The backend shall validate required parameters and return JSON responses. \\
+FR-08 & The attack modules shall report network and HTTP execution stages. \\
+FR-09 & The frontend shall present scanner output in a terminal-style component. \\
+FR-10 & The application shall store test results in browser local storage. \\
+FR-11 & The application shall provide a dark/light theme switch. \\
+FR-12 & The application shall support responsive navigation and PWA installation. \\
+FR-13 & The DROP TABLE module shall demonstrate risk without executing the destructive statement. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Non-Functional Requirements}
+
+\begin{longtable}{p{1.8cm}p{11.8cm}}
+\caption{Non-functional requirements}\label{tab:nonfunctional-requirements}\\
+\toprule
+\textbf{ID} & \textbf{Requirement} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requirement} \\
+\midrule
+\endhead
+NFR-01 & The system shall be understandable for classroom demonstrations. \\
+NFR-02 & The codebase shall separate presentation, API routing, database access, and attack logic. \\
+NFR-03 & Public Internet targets shall be rejected by the scanner modules. \\
+NFR-04 & Network operations shall use timeouts and controlled error handling. \\
+NFR-05 & The application shall run consistently through Docker Compose. \\
+NFR-06 & The frontend shall use lazy loading to reduce the initial bundle size. \\
+NFR-07 & The interface shall remain usable on desktop and mobile screen sizes. \\
+NFR-08 & Destructive SQL shall not be executed by the educational DROP TABLE module. \\
+NFR-09 & Secure examples shall use parameterized database queries. \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section{Technology Stack}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Main technologies used in the project}
+\label{tab:technology-stack}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.0cm}p{3.2cm}X}
+\toprule
+Layer & Technology & Purpose \\
+\midrule
+Frontend & React 19 & Component-based single-page user interface. \\
+Routing & React Router 7 & Hash-based client-side routing and redirects. \\
+Build Tool & Vite 6 & Development server, bundling, and optimized builds. \\
+Styling & Tailwind CSS 4 & Responsive utility-first styling and theme implementation. \\
+Icons & Lucide React & Consistent interface iconography. \\
+Backend & Flask & HTTP API, blueprint registration, and orchestration of attack modules. \\
+CORS & Flask-Cors & Enables frontend-to-backend requests during local development. \\
+HTTP Client & Requests & Sends HTTP requests from attack modules to the vulnerable target. \\
+Database & SQLite & Stores educational user records for the local backend example. \\
+Containers & Docker / Compose & Reproducible frontend and backend environments. \\
+Testing & Pytest & Available backend testing framework. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================
+\section{System Architecture}
+% ============================================================
+
+\subsection{Architectural Overview}
+
+The project follows a three-part laboratory architecture:
+
+\begin{enumerate}[leftmargin=1.4cm]
+    \item \textbf{Educational frontend:} a React application on port \code{3000}.
+    \item \textbf{Attack orchestration API:} a Flask service on port \code{5000}.
+    \item \textbf{Vulnerable target:} a separate local Golimar Store application, normally on port \code{2000}.
+\end{enumerate}
+
+The browser does not directly implement the attack logic. Instead, it submits the target URL and payload to the Flask API. The backend performs URL parsing, local/private network validation, DNS resolution, connectivity testing, HTTP communication, and response interpretation. It then returns both machine-readable result fields and human-readable terminal output.
+
+\begin{figure}[H]
+\centering
+\fbox{%
+\begin{minipage}{0.92\textwidth}
+\centering
+\textbf{User Browser}\par
+React Frontend - Port 3000\par
+$\downarrow$ JSON over HTTP\par
+\textbf{Flask Attack API}\par
+Backend - Port 5000\par
+$\downarrow$ Controlled local HTTP request\par
+\textbf{Golimar Store Vulnerable Target}\par
+Local application - Port 2000\par
+$\downarrow$\par
+Database and intentionally vulnerable endpoints
+\end{minipage}}
+\caption{Logical architecture of the SQL injection laboratory}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Frontend Architecture}
+
+The frontend is a React single-page application using \code{HashRouter}. Pages are loaded lazily through \code{React.lazy} and rendered inside a shared layout. Important frontend responsibilities include:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item route management and backward-compatible redirects;
+    \item target URL and payload input forms;
+    \item predefined attack presets;
+    \item terminal animation and status presentation;
+    \item local log storage;
+    \item responsive desktop/mobile navigation;
+    \item light and dark themes;
+    \item installable PWA behavior.
+\end{itemize}
+
+The primary routes are shown in Table~\ref{tab:frontend-routes}.
+
+\begin{longtable}{p{5.4cm}p{8.2cm}}
+\caption{Important frontend routes}\label{tab:frontend-routes}\\
+\toprule
+\textbf{Route} & \textbf{Purpose} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Route} & \textbf{Purpose} \\
+\midrule
+\endhead
+\code{/} and \code{/login} & Entry/login page. \\
+\code{/home} & Project overview dashboard. \\
+\code{/instructions} & Educational instructions and attack explanations. \\
+\code{/attacks} & Attack module overview. \\
+\code{/payload-library} & Payload reference and categorized examples. \\
+\code{/logs} & Locally stored test history. \\
+\code{/attacks/classic-injection} & Remote classic SQL injection scanner. \\
+\code{/attacks/login-bypass} & Authentication bypass demonstration. \\
+\code{/attacks/union-attack} & UNION extraction and table enumeration. \\
+\code{/attacks/blind-injection} & Boolean-based blind SQL injection. \\
+\code{/attacks/drop-table} & Safe destructive-query capability demonstration. \\
+\code{/attacks/comment-attack} & SQL comment-based authentication bypass. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Backend Architecture}
+
+The Flask backend uses the application factory pattern. The \code{create\_app()} function loads configuration, enables CORS, and registers four blueprints:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item \code{/api}: health and demonstration endpoints;
+    \item \code{/api/auth}: placeholder login/logout endpoints;
+    \item \code{/api}: vulnerable and secure demonstration endpoints;
+    \item \code{/api/attacks}: attack execution endpoints.
+\end{itemize}
+
+Each attack implementation is separated into its own Python module under \code{backend/attacks}. This keeps routing logic small and allows each scanner to maintain attack-specific parsing and result fields.
+
+\subsection{Database Layer}
+
+The included backend database is SQLite. The database path is calculated relative to the backend directory and opened with \code{sqlite3.Row} as the row factory. The schema contains a simple \code{users} table with \code{id}, \code{username}, \code{password}, and \code{role} fields.
+
+The secure login example uses placeholders:
+
+\begin{lstlisting}[language=Python,caption={Parameterized secure login query}]
+user = connection.execute(
+    """
+    SELECT id, username, role
+    FROM users
+    WHERE username = ? AND password = ?
+    """,
+    (username, password),
+).fetchone()
+\end{lstlisting}
+
+Because the SQL structure and user data are sent separately, injected SQL operators are treated as data rather than executable syntax.
+
+\subsection{Docker Networking}
+
+The backend container listens on \code{0.0.0.0:5000}. When an attack target contains \code{localhost} or \code{127.0.0.1}, the attack modules detect container execution and translate the hostname to \code{host.docker.internal}. The Compose configuration adds the following mapping:
+
+\begin{lstlisting}[caption={Docker host mapping used by the backend}]
+extra_hosts:
+  - "host.docker.internal:host-gateway"
+\end{lstlisting}
+
+This allows the backend container to reach a target service running on the host machine while preserving the user-facing local URL.
+
+% ============================================================
+\section{Project Structure}
+% ============================================================
+
+\begin{lstlisting}[caption={Simplified repository structure}]
+SQL Inject/
+|-- backend/
+|   |-- app/
+|   |   |-- controllers/
+|   |   |-- models/
+|   |   `-- __init__.py
+|   |-- attacks/
+|   |   |-- blind_injector.py
+|   |   |-- classic_injector.py
+|   |   |-- comment_injector.py
+|   |   |-- droptable.py
+|   |   |-- login_bypass_injector.py
+|   |   |-- table_enumeration_injector.py
+|   |   `-- union_injector.py
+|   |-- database/
+|   |   |-- app.db
+|   |   |-- schema.sql
+|   |   `-- seed.py
+|   |-- routes/attack_routes.py
+|   |-- config.py
+|   |-- requirements.txt
+|   `-- run.py
+|-- frontend/
+|   |-- public/
+|   |-- src/
+|   |   |-- components/
+|   |   |-- layouts/
+|   |   |-- pages/
+|   |   |-- services/
+|   |   `-- utils/
+|   |-- package.json
+|   `-- vite.config.js
+|-- docs/
+|   |-- main.tex
+|   |-- sql-inject.pptx
+|   `-- sql-injection-attack.pdf
+|-- screenshots/
+|-- docker-compose.yml
+`-- Dockerfile
+\end{lstlisting}
+
+\subsection{Frontend Components}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item \code{App.jsx}: application routes, lazy loading, and redirects.
+    \item \code{Layout.jsx}: navigation, theme switching, PWA installation, mobile menu, footer.
+    \item \code{Terminal.jsx}: terminal-style output visualization.
+    \item \code{PageTransition.jsx}: page transition wrapper.
+    \item \code{ErrorBoundary.jsx}: catches rendering failures.
+    \item \code{services/api.js}: communication with the Flask backend.
+    \item \code{utils/terminalAnimation.js}: animated line-by-line scanner output.
+    \item \code{utils/logger.js}: browser-side test history.
+\end{itemize}
+
+\subsection{Backend Modules}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item \code{app/__init__.py}: Flask application factory and blueprint registration.
+    \item \code{controllers/api\_controller.py}: health endpoint.
+    \item \code{controllers/demo\_controller.py}: vulnerable/secure demonstration endpoints.
+    \item \code{models/db.py}: SQLite connection management.
+    \item \code{models/user\_model.py}: secure parameterized login query.
+    \item \code{routes/attack\_routes.py}: validates requests and invokes attack modules.
+    \item \code{attacks/*.py}: network checks, payload transmission, response analysis, and formatted output.
+\end{itemize}
+
+% ============================================================
+\section{API Design}
+% ============================================================
+
+\subsection{General Endpoints}
+
+\begin{table}[H]
+\centering
+\caption{General backend API endpoints}
+\label{tab:general-api}
+\begin{tabularx}{\textwidth}{p{2.0cm}p{5.4cm}X}
+\toprule
+Method & Endpoint & Purpose \\
+\midrule
+GET & \code{/api/health} & Returns API service status. \\
+POST & \code{/api/auth/login} & Authentication placeholder endpoint. \\
+POST & \code{/api/auth/logout} & Logout placeholder endpoint. \\
+POST & \code{/api/secure/login} & Demonstrates parameterized SQLite authentication. \\
+POST & \code{/api/vulnerable/login} & Placeholder vulnerable login endpoint. \\
+POST & \code{/api/vulnerable/search} & Placeholder vulnerable search endpoint. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Attack Endpoints}
+
+\begin{longtable}{p{2.0cm}p{5.2cm}p{6.2cm}}
+\caption{Attack execution API endpoints}\label{tab:attack-api}\\
+\toprule
+\textbf{Method} & \textbf{Endpoint} & \textbf{Main result indicators} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Method} & \textbf{Endpoint} & \textbf{Main result indicators} \\
+\midrule
+\endhead
+POST & \code{/api/attacks/classic} & Reachability, request completion, vulnerability detection, response metrics. \\
+POST & \code{/api/attacks/login-bypass} & Reachability, HTTP completion, authentication bypass, final URL. \\
+POST & \code{/api/attacks/union} & UNION leak detection, leaked rows, executed query, response metrics. \\
+POST & \code{/api/attacks/table-enumeration} & Enumerated table names, executed query, table count. \\
+POST & \code{/api/attacks/blind} & Boolean condition result, response length, elapsed time. \\
+POST & \code{/api/attacks/comment} & Comment injection result, redirect state, cookies, final URL. \\
+POST & \code{/api/attacks/drop-table} & Vulnerability capability, stacked-query indicator, proof that no destructive execution occurred. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Request Format}
+
+Most attack routes expect JSON containing \code{target\_url} and \code{payload}:
+
+\begin{lstlisting}[caption={Typical attack request body}]
+{
+  "target_url": "http://127.0.0.1:2000/api/vulnerable/search",
+  "payload": "' UNION SELECT ... -- "
+}
+\end{lstlisting}
+
+The comment attack may additionally include a \code{password} value. Missing parameters produce an HTTP \code{400} response. Internal failures produce an HTTP \code{500} response with an error message.
+
+% ============================================================
+\section{User Interface}
+% ============================================================
+
+\subsection{Home Dashboard}
+
+The home page introduces the laboratory, summarizes the available modules, and provides direct navigation to the educational workflow.
+
+\screenshot{../screenshots/home.png}{0.92}{Home dashboard of the SQL injection laboratory}
+
+\subsection{Instructions}
+
+The instructions module explains the theory, purpose, payload structure, expected behavior, and mitigation of each attack category.
+
+\screenshot{../screenshots/instructions.png}{0.92}{Instructions overview}
+
+\subsection{Attack Overview}
+
+The attack overview presents the six supported techniques as selectable cards. Each card opens a dedicated remote scanner page.
+
+\screenshot{../screenshots/attacks.png}{0.92}{Attack module overview}
+
+\subsection{Payload Library}
+
+The payload library is a reference section containing attack-specific payload examples. Its purpose is to support learning and simplify controlled demonstrations.
+
+\screenshot{../screenshots/payload-library.png}{0.92}{Payload library}
+
+\subsection{Terminal Output}
+
+Each interactive attack page contains a terminal component. It displays scanner stages such as system initialization, target parsing, DNS resolution, connection setup, payload handling, HTTP response analysis, and final result classification.
+
+\screenshot{../screenshots/terminal.png}{0.92}{Terminal-style scanner output}
+
+% ============================================================
+\section{Attack Modules}
+% ============================================================
+
+\subsection{Common Attack Workflow}
+
+Although each attack module has specialized detection logic, the general workflow is consistent:
+
+\begin{enumerate}[leftmargin=1.4cm]
+    \item Read the target URL and payload from the frontend.
+    \item Validate that both fields are present.
+    \item Parse the scheme, hostname, port, path, and query parameters.
+    \item Translate loopback addresses when running inside Docker.
+    \item Resolve the hostname through DNS.
+    \item verify that the resolved address is loopback or private.
+    \item Open a short TCP connection to verify reachability.
+    \item Send the attack-specific HTTP request when permitted.
+    \item Measure status code, elapsed time, response length, redirection, and content signals.
+    \item Return structured JSON and formatted terminal output.
+    \item Save the summarized result in browser local storage.
+\end{enumerate}
+
+\subsection{Classic SQL Injection}
+
+\subsubsection{Concept}
+
+Classic SQL injection modifies a query by closing the original quoted value and adding an always-true condition. For example, a vulnerable query may be constructed as follows:
+
+\begin{lstlisting}[language=SQL,caption={Conceptual vulnerable search query}]
+SELECT * FROM products
+WHERE category = '<USER_INPUT>';
+\end{lstlisting}
+
+Supplying a tautology such as \code{1' OR '1'='1} can change the WHERE clause so that it matches more rows than intended.
+
+\subsubsection{Project Implementation}
+
+The classic scanner supports editable target URLs, a payload catalog, and multiple presets. Example presets include product category, customer search, and public book database patterns. The backend performs a real HTTP request to the local target and classifies the result using response-specific evidence.
+
+\subsubsection{Security Impact}
+
+A successful classic injection may expose unauthorized records, bypass filters, or change application behavior. The primary defense is a parameterized query combined with strict server-side validation.
+
+\subsection{Login Bypass}
+
+\subsubsection{Concept}
+
+Login bypass occurs when injected input changes an authentication query so that the password condition becomes irrelevant. A simplified vulnerable pattern is:
+
+\begin{lstlisting}[language=SQL,caption={Conceptual vulnerable authentication query}]
+SELECT * FROM users
+WHERE email = '<EMAIL>'
+  AND password = '<PASSWORD>';
+\end{lstlisting}
+
+The project preset uses:
+
+\begin{lstlisting}[caption={Login bypass payload used by the project}]
+admin ' OR 1=1 --
+\end{lstlisting}
+
+The quote terminates the original value, \code{OR 1=1} creates a true expression, and \code{--} comments out the remaining password check.
+
+\subsubsection{Demonstration Target}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Target: \code{http://127.0.0.1:2000/login}
+    \item Preset: Golimar Store Login
+    \item Result field: \code{authentication\_bypassed}
+\end{itemize}
+
+\screenshot{../screenshots/login-bypass.png}{0.92}{Remote login bypass module}
+
+\subsection{UNION-Based SQL Injection}
+
+\subsubsection{Concept}
+
+The SQL \code{UNION} operator combines result sets from compatible SELECT statements. If an injectable query returns a known number of columns with compatible data types, a crafted UNION clause can retrieve data from another table.
+
+The main project payload is:
+
+\begin{lstlisting}[caption={UNION payload for retrieving user records}]
+' UNION SELECT id,email,0,is_admin,'',password,'user-record'
+FROM users --
+\end{lstlisting}
+
+The scanner sends the payload to the local vulnerable search endpoint and analyzes the JSON or HTML response for leaked rows.
+
+\subsubsection{Table Enumeration}
+
+The UNION page also includes a second preset for database table-name enumeration:
+
+\begin{lstlisting}[caption={Table enumeration payload}]
+' UNION SELECT ROW_NUMBER() OVER (),table_name,0,0,
+'Database table discovered through information_schema','',
+'table-record'
+FROM information_schema.tables
+WHERE table_schema='public' --
+\end{lstlisting}
+
+This preset uses the dedicated \code{/api/attacks/table-enumeration} backend route and returns the discovered table names and count.
+
+\subsubsection{Demonstration Target}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Target: \code{http://127.0.0.1:2000/api/vulnerable/search}
+    \item Modes: user-record extraction and table enumeration
+    \item Key results: leaked rows, table names, executed query, response metrics
+\end{itemize}
+
+\subsection{Boolean-Based Blind SQL Injection}
+
+\subsubsection{Concept}
+
+Blind SQL injection is used when database values are not directly displayed. Instead, the attacker asks true/false questions and infers information from observable differences such as response content, status, timing, or page length.
+
+The project uses a Boolean condition similar to:
+
+\begin{lstlisting}[caption={Boolean-based blind payload}]
+1' AND substr(
+  (SELECT email FROM users WHERE is_admin=1 LIMIT 1),
+  1,1
+)='a' --
+\end{lstlisting}
+
+This asks whether the first character of the selected administrator email is \code{a}.
+
+\subsubsection{Demonstration Target}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Target: \code{http://127.0.0.1:2000/products?product\_id=1}
+    \item Injected parameter: \code{product\_id}
+    \item Main result: \code{blind\_condition}
+\end{itemize}
+
+\screenshot{../screenshots/blind-injection.png}{0.92}{Boolean-based blind SQL injection module}
+
+\subsection{SQL Comment Attack}
+
+\subsubsection{Concept}
+
+SQL comment tokens can remove the remaining part of a vulnerable statement. In authentication queries, this can eliminate the password condition after a valid or guessed account identifier.
+
+The project preset uses:
+
+\begin{lstlisting}[caption={Comment injection payload}]
+admin@example.com' --
+\end{lstlisting}
+
+The backend submits the payload and a test password, then evaluates indicators such as HTTP status, redirection, cookies, response length, and final URL.
+
+\subsubsection{Demonstration Target}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Target: \code{http://127.0.0.1:2000/login}
+    \item Password: \code{test}
+    \item Main result: \code{comment\_injection}
+\end{itemize}
+
+\screenshot{../screenshots/comment-attack.png}{0.92}{SQL comment attack module}
+
+\subsection{DROP TABLE Demonstration}
+
+\subsubsection{Concept}
+
+A stacked-query vulnerability may allow an attacker to terminate the original statement and append another SQL command. The educational payload displayed by the project is:
+
+\begin{lstlisting}[caption={Displayed destructive payload}]
+1'; DROP TABLE products; --
+\end{lstlisting}
+
+If such a payload were executed against a vulnerable database driver that permits stacked statements, the \code{products} table could be removed.
+
+\subsubsection{Non-Destructive Safety Design}
+
+The final project implementation intentionally does not transmit or execute the destructive statement. The frontend explicitly informs the user that the payload is displayed only for educational purposes. The module performs a safe capability assessment and verifies that the table remains available.
+
+The result model includes:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item \code{vulnerability\_detected};
+    \item \code{stacked\_queries\_possible};
+    \item \code{destructive\_statement\_executed}, expected to remain false;
+    \item \code{table\_exists\_before};
+    \item \code{table\_exists\_after}.
+\end{itemize}
+
+This design preserves the teaching value while preventing accidental data loss.
+
+\subsubsection{Demonstration Target}
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Target: \code{http://127.0.0.1:2000/api/vulnerable/drop-products}
+    \item Payload status: displayed but not dispatched
+    \item Expected result: vulnerability indication with the product table preserved
+\end{itemize}
+
+\screenshot{../screenshots/drop-table.png}{0.92}{Non-destructive DROP TABLE vulnerability demonstration}
+
+% ============================================================
+\section{Safety and Ethical Controls}
+% ============================================================
+
+\subsection{Private-Network Restriction}
+
+The attack modules resolve the supplied hostname and inspect the resulting IP address. Requests are allowed only when the address is loopback or private, or when Docker host translation is active. Public Internet targets are rejected with a safety error.
+
+This restriction reduces the possibility of using the project against unauthorized systems. It does not replace legal and ethical responsibility; users must still have explicit permission for every target.
+
+\subsection{Controlled Connectivity}
+
+Before sending an HTTP request, the backend performs a TCP connectivity test with a short timeout. The request itself also uses timeouts and exception handling. Failures are returned as structured results rather than causing the API process to terminate.
+
+\subsection{Destructive Payload Handling}
+
+The DROP TABLE page is intentionally non-destructive. The payload is visible so students can analyze its syntax, but the module does not dispatch it. This is an important distinction between demonstrating a vulnerability and damaging the target environment.
+
+\subsection{Data Handling}
+
+Test logs are stored in the browser's local storage. They should be treated as local demonstration data and should not contain credentials or sensitive production information. The bundled SQLite database includes only artificial educational accounts.
+
+% ============================================================
+\section{Secure Implementation Principles}
+% ============================================================
+
+\subsection{Parameterized Queries}
+
+The most important mitigation is to use prepared or parameterized statements. The secure login model in this project demonstrates the correct SQLite pattern with \code{?} placeholders. User values are bound separately from the SQL command.
+
+\subsection{Password Security}
+
+The educational SQLite schema stores plaintext passwords to keep the demonstration simple. This must never be copied into a production system. A real application must:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item hash passwords with a modern password-hashing algorithm such as Argon2id or bcrypt;
+    \item generate a unique salt automatically through the hashing library;
+    \item use constant-time verification functions;
+    \item enforce rate limiting and account protection;
+    \item use secure session cookies and CSRF protection.
+\end{itemize}
+
+\subsection{Least Privilege}
+
+The database account used by an application should have only the permissions necessary for its normal operation. A search endpoint should not connect with a role capable of dropping tables or managing database users.
+
+\subsection{Input Validation}
+
+Input validation supports, but does not replace, parameterization. Examples include validating numeric identifiers as integers, applying maximum lengths, using allow-lists for sortable columns, and rejecting unexpected request structures.
+
+\subsection{Error Handling}
+
+Database errors should be logged securely on the server and translated into generic client responses. Returning raw SQL errors can reveal table names, column names, query structure, or database technology.
+
+\subsection{Security Comparison}
+
+\begin{table}[H]
+\centering
+\caption{Vulnerable and secure query construction}
+\label{tab:vulnerable-secure}
+\begin{tabularx}{\textwidth}{p{3cm}X X}
+\toprule
+Aspect & Vulnerable approach & Secure approach \\
+\midrule
+Query creation & String concatenation & Parameterized statement \\
+Input meaning & May become SQL syntax & Always treated as data \\
+Error output & Raw database errors & Generic client errors \\
+Database role & Excessive privileges & Least-privileged account \\
+Passwords & Plaintext comparison & Strong password hashing \\
+Monitoring & No security logging & Authentication and anomaly logging \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================
+\section{Installation and Execution}
+% ============================================================
+
+\subsection{Prerequisites}
+
+The recommended environment requires:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Docker Desktop or Docker Engine with Docker Compose;
+    \item a modern web browser;
+    \item the separate Golimar Store vulnerable target running locally when demonstrating real attack requests;
+    \item optionally Node.js 20 and Python 3.11 for non-container development.
+\end{itemize}
+
+\subsection{Docker Compose Execution}
+
+From the repository root, run:
+
+\begin{lstlisting}[caption={Starting the project with Docker Compose}]
+docker compose up --build
+\end{lstlisting}
+
+After startup:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Frontend: \url{http://localhost:3000}
+    \item Backend health endpoint: \url{http://localhost:5000/api/health}
+    \item Vulnerable target: normally \url{http://127.0.0.1:2000}
+\end{itemize}
+
+To stop the containers:
+
+\begin{lstlisting}[caption={Stopping the project}]
+docker compose down
+\end{lstlisting}
+
+\subsection{Manual Backend Execution}
+
+\begin{lstlisting}[caption={Running the Flask backend manually}]
+cd backend
+python -m venv .venv
+source .venv/bin/activate        # Linux/macOS
+# .venv\Scripts\activate         # Windows PowerShell
+pip install -r requirements.txt
+python run.py
+\end{lstlisting}
+
+\subsection{Manual Frontend Execution}
+
+\begin{lstlisting}[caption={Running the React frontend manually}]
+cd frontend
+npm install
+npm run dev
+\end{lstlisting}
+
+\subsection{Database Initialization}
+
+The included SQLite database can be recreated by executing:
+
+\begin{lstlisting}[caption={Recreating the educational SQLite database}]
+cd backend
+python database/seed.py
+\end{lstlisting}
+
+The script reads \code{database/schema.sql}, recreates the \code{users} table, inserts demonstration accounts, and commits the database.
+
+% ============================================================
+\section{Demonstration Procedure}
+% ============================================================
+
+A recommended classroom demonstration follows these steps:
+
+\begin{enumerate}[leftmargin=1.4cm]
+    \item Start the Golimar Store vulnerable application on port \code{2000}.
+    \item Start the \projectname{} frontend and backend through Docker Compose.
+    \item Open \url{http://localhost:3000} and enter the application.
+    \item Present the Instructions page and explain SQL query construction.
+    \item Open the Attacks page and select one attack category.
+    \item Select the corresponding Golimar preset.
+    \item Explain the target URL and payload before execution.
+    \item Execute the scan and follow the terminal stages.
+    \item Explain the final result and the evidence used by the scanner.
+    \item Open the Logs page to show the recorded test result.
+    \item Present the secure alternative using parameterized queries.
+\end{enumerate}
+
+\subsection{Example: Login Bypass Presentation}
+
+\begin{enumerate}[leftmargin=1.4cm]
+    \item Explain that the login endpoint combines email and password conditions.
+    \item Show the payload \code{admin ' OR 1=1 --}.
+    \item Identify the three parts: quote termination, tautology, and comment token.
+    \item Execute the preset against the local login page.
+    \item Observe DNS, connection, HTTP request, redirection, and authentication result.
+    \item Conclude with the parameterized query mitigation.
+\end{enumerate}
+
+% ============================================================
+\section{Testing Strategy}
+% ============================================================
+
+\subsection{Backend Unit and Integration Tests}
+
+Recommended backend tests include:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item application factory creates a Flask application successfully;
+    \item \code{/api/health} returns HTTP 200 and expected JSON;
+    \item missing attack parameters return HTTP 400;
+    \item public IP targets are rejected;
+    \item malformed URLs produce controlled error results;
+    \item unreachable local ports produce a failed connectivity result;
+    \item secure login accepts valid demonstration credentials;
+    \item secure login rejects injected input;
+    \item DROP TABLE result always reports no destructive execution;
+    \item table existence remains unchanged after the DROP TABLE demonstration.
+\end{itemize}
+
+\subsection{Frontend Tests}
+
+Recommended frontend tests include:
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item all main routes render without errors;
+    \item old attack URLs redirect to the new \code{/attacks/...} paths;
+    \item preset selection updates target URL and payload;
+    \item empty target or payload is rejected before execution;
+    \item loading and result states are displayed correctly;
+    \item terminal expansion does not exceed the page width;
+    \item theme preference persists in local storage;
+    \item mobile navigation opens and closes correctly;
+    \item logs are saved and rendered correctly;
+    \item PWA manifest and service worker files are available.
+\end{itemize}
+
+\subsection{Manual Acceptance Test Matrix}
+
+\begin{longtable}{p{1.3cm}p{4.2cm}p{5.0cm}p{3.0cm}}
+\caption{Manual acceptance test matrix}\label{tab:test-matrix}\\
+\toprule
+\textbf{ID} & \textbf{Test} & \textbf{Expected result} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Test} & \textbf{Expected result} & \textbf{Status} \\
+\midrule
+\endhead
+T-01 & Open frontend & Login/entry page loads. & To be verified \\
+T-02 & Backend health check & JSON status reports success. & To be verified \\
+T-03 & Classic local preset & Terminal completes and result is classified. & To be verified \\
+T-04 & Login bypass preset & Authentication bypass evidence is displayed. & To be verified \\
+T-05 & UNION user extraction & Leaked rows are displayed when target is vulnerable. & To be verified \\
+T-06 & Table enumeration & Discovered table names are listed. & To be verified \\
+T-07 & Blind true/false condition & Boolean result reflects target response. & To be verified \\
+T-08 & Comment attack & Redirect/cookie/response indicators are shown. & To be verified \\
+T-09 & DROP TABLE demo & No destructive statement is transmitted or executed. & To be verified \\
+T-10 & Public target URL & Backend rejects the target. & To be verified \\
+T-11 & Logs page & Completed test appears in local history. & To be verified \\
+T-12 & Mobile layout & Navigation and attack forms remain usable. & To be verified \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section{Known Limitations}
+% ============================================================
+
+\begin{itemize}[leftmargin=1.4cm]
+    \item Detection logic is tailored to the local Golimar Store responses and may not generalize to other applications.
+    \item Most scans test a single payload rather than performing automated payload generation.
+    \item The bundled vulnerable and secure demonstration endpoints are partly placeholders.
+    \item The included SQLite user database stores educational plaintext passwords and is not production-ready.
+    \item Browser logs are local to one device and are not centrally managed.
+    \item The backend runs with Flask debug mode enabled in the current development configuration.
+    \item CORS is enabled broadly for local development.
+    \item No authentication or authorization protects the attack API itself.
+    \item Automated test coverage is not yet included in the submitted repository.
+    \item The attack service depends on a separately running vulnerable target for complete demonstrations.
+\end{itemize}
+
+% ============================================================
+\section{Recommended Improvements}
+% ============================================================
+
+\begin{enumerate}[leftmargin=1.4cm]
+    \item Add a complete automated Pytest suite and frontend component tests.
+    \item Replace placeholder vulnerable/secure endpoints with isolated, resettable lab scenarios.
+    \item Add a one-click database reset function for repeatable demonstrations.
+    \item Disable Flask debug mode outside local development.
+    \item Restrict CORS to the known frontend origin.
+    \item Add authentication or a local-only binding policy for the attack API.
+    \item Add structured server-side logging with request correlation identifiers.
+    \item Add timing graphs for blind SQL injection comparisons.
+    \item Add side-by-side vulnerable and secure source-code explanations.
+    \item Add a lab status page that checks frontend, backend, target, and database readiness.
+    \item Remove generated directories such as \code{node\_modules}, \code{dist}, and \code{\_\_pycache\_\_} from version control.
+    \item Add a repository-level \code{.gitignore}, license, contribution guide, and security policy.
+\end{enumerate}
+
+% ============================================================
+\section{Team Organization}
+% ============================================================
+
+The project was completed as a Group C cybersecurity course project. Work was divided across project coordination, frontend implementation, backend/API development, database preparation, attack research, testing, presentation preparation, and documentation. Git-based collaboration allowed features to be developed independently and integrated into the final demonstration environment.
+
+A recommended responsibility model is shown below. It may be adjusted to match the final officially agreed team allocation.
+
+\begin{table}[H]
+\centering
+\caption{Project responsibility areas}
+\label{tab:team-responsibilities}
+\begin{tabularx}{\textwidth}{p{4cm}X}
+\toprule
+Responsibility & Main tasks \\
+\midrule
+Project coordination & Scope, integration planning, final review, and presentation coordination. \\
+Frontend development & React pages, routes, components, responsive layout, themes, and terminal UI. \\
+Backend development & Flask application, API routes, validation, and error handling. \\
+Attack implementation & HTTP scanner modules, payload handling, and response analysis. \\
+Database engineering & SQLite schema, seed data, and secure query examples. \\
+Testing and quality assurance & Functional checks, safety verification, Docker validation, and bug reporting. \\
+Documentation and presentation & LaTeX report, screenshots, diagrams, slides, and speaking material. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================
+\section{Conclusion}
+% ============================================================
+
+The \projectname{} project provides a practical and visually structured environment for learning SQL injection. Its strongest aspect is the integration of theory, payload configuration, real local HTTP communication, terminal-style feedback, and secure coding guidance in one application. The separation between React presentation logic, Flask routing, attack-specific Python modules, and SQLite data access makes the system understandable and extensible.
+
+The project demonstrates six important SQL injection patterns: tautology injection, login bypass, UNION-based extraction, table enumeration, Boolean-based blind inference, comment-based bypass, and stacked-query risk. At the same time, it includes essential safety controls. Scanning is restricted to local or private targets, and the DROP TABLE scenario is explicitly non-destructive.
+
+For production-quality security tooling, further work would be needed in authentication, test coverage, configuration hardening, generalized detection, and secure secret management. However, as a controlled cybersecurity course laboratory, the project successfully demonstrates why unsafe SQL construction is dangerous and why parameterized queries, least privilege, secure password storage, validation, and careful error handling are necessary.
+
+% ============================================================
+\appendix
+\section{Selected Configuration Files}
+% ============================================================
+
+\subsection{Docker Compose Configuration}
+
+\begin{lstlisting}[caption={Project Docker Compose configuration}]
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+    volumes:
+      - ./backend:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_PORT=3000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+\end{lstlisting}
+
+\subsection{Flask Application Factory}
+
+\begin{lstlisting}[language=Python,caption={Simplified Flask application factory}]
+from flask import Flask
+from flask_cors import CORS
+from config import Config
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+    CORS(app)
+
+    from .controllers.api_controller import api_bp
+    from .controllers.auth_controller import auth_bp
+    from .controllers.demo_controller import demo_bp
+    from routes.attack_routes import attack_bp
+
+    app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(demo_bp, url_prefix='/api')
+    app.register_blueprint(attack_bp, url_prefix='/api/attacks')
+
+    return app
+\end{lstlisting}
+
+\section{Payload Reference}
+
+\begin{longtable}{p{3.2cm}p{10.3cm}}
+\caption{Payloads included in the interactive presets}\label{tab:payload-reference}\\
+\toprule
+\textbf{Attack} & \textbf{Payload} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Attack} & \textbf{Payload} \\
+\midrule
+\endhead
+Classic & \code{1' OR '1'='1} \\
+Login bypass & \code{admin ' OR 1=1 --} \\
+UNION extraction & \code{' UNION SELECT id,email,0,is\_admin,'',password,'user-record' FROM users --} \\
+Blind SQLi & \code{1' AND substr((SELECT email FROM users WHERE is\_admin=1 LIMIT 1),1,1)='a' --} \\
+Comment attack & \code{admin@example.com' --} \\
+DROP TABLE & \code{1'; DROP TABLE products; --} (display only; not executed) \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section{References}
+% ============================================================
+
+\begin{thebibliography}{9}
+
+\bibitem{owasp-sqli}
+OWASP Foundation,
+\textit{SQL Injection},
+OWASP Web Security Testing Guide and OWASP vulnerability documentation.
+
+\bibitem{owasp-top10}
+OWASP Foundation,
+\textit{OWASP Top 10: Injection},
+Web application security risk guidance.
+
+\bibitem{flask}
+Pallets Projects,
+\textit{Flask Documentation},
+Flask web application framework documentation.
+
+\bibitem{react}
+Meta Open Source,
+\textit{React Documentation},
+React user interface library documentation.
+
+\bibitem{sqlite}
+SQLite Consortium,
+\textit{SQLite Documentation},
+SQLite SQL language and parameter binding documentation.
+
+\bibitem{docker}
+Docker Inc.,
+\textit{Docker and Docker Compose Documentation},
+Container build and multi-service orchestration documentation.
+
+\end{thebibliography}
+
+\end{document}

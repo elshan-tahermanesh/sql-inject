@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-black: var(--bg-color);
+  --color-cyber-card: var(--card-bg);
+  --color-cyber-border: var(--border-color);
+  --color-cyber-blue: var(--accent-color);
+  --color-cyber-blue-light: var(--accent-light);
+  --color-cyber-blue-glow: var(--accent-glow);
+  --color-cyber-red: var(--red-color);
+  --color-cyber-green: var(--green-color);
+  --color-cyber-dim: var(--dim-color);
+  --color-cyber-text: var(--text-color);
+  --color-cyber-input: var(--input-bg);
+  --color-cyber-pre: var(--pre-bg);
+  --color-cyber-title: var(--title-color);
+  --color-cyber-header: var(--header-bg);
+
+  /* Syntax theme classes mapping */
+  --color-code-string: var(--code-string);
+  --color-code-keyword: var(--code-keyword);
+  --color-code-comment: var(--code-comment);
+  --color-code-py-keyword: var(--code-py-keyword);
+  --color-code-py-string: var(--code-py-string);
+  --color-code-variable: var(--code-variable);
+  --color-code-function: var(--code-function);
+  
+  --font-sans: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+:root {
+  --bg-color: #050810;
+  --text-color: #c8d8f0;
+  --card-bg: #0d1526;
+  --border-color: #1a2a4a;
+  --accent-color: #1a6aff;
+  --accent-light: #4d8fff;
+  --accent-glow: rgba(26, 106, 255, 0.15);
+  --accent-glow-red: rgba(255, 58, 58, 0.15);
+  --accent-glow-green: rgba(0, 230, 118, 0.15);
+  --red-color: #ff3a3a;
+  --green-color: #00e676;
+  --dim-color: #94a3b8;
+  --input-bg: #060b18;
+  --pre-bg: #0b0f19;
+  --title-color: #ffffff;
+  --header-bg: rgba(8, 13, 26, 0.9);
+
+  /* Code Syntax Highlighting variables */
+  --code-string: #a7f3d0;
+  --code-keyword: #c678dd;
+  --code-comment: #64748b;
+  --code-py-keyword: #f87171;
+  --code-py-string: #e9c46a;
+  --code-variable: #e06c75;
+  --code-function: #61afef;
+}
+
+.light {
+  --bg-color: #f1f5f9;
+  --text-color: #1e293b;
+  --card-bg: #ffffff;
+  --border-color: #cbd5e1;
+  --accent-color: #1a6aff;
+  --accent-light: #2563eb;
+  --accent-glow: rgba(26, 106, 255, 0.08);
+  --accent-glow-red: rgba(255, 58, 58, 0.08);
+  --accent-glow-green: rgba(0, 230, 118, 0.08);
+  --red-color: #dc2626;
+  --green-color: #16a34a;
+  --dim-color: #475569;
+  --input-bg: #e2e8f0;
+  --pre-bg: #f8fafc;
+  --title-color: #0f172a;
+  --header-bg: rgba(241, 245, 249, 0.95);
+
+  /* Code Syntax Highlighting variables */
+  --code-string: #0f766e;
+  --code-keyword: #7c3aed;
+  --code-comment: #475569;
+  --code-py-keyword: #b91c1c;
+  --code-py-string: #b45309;
+  --code-variable: #c2410c;
+  --code-function: #0284c7;
+}
+
+@layer base {
+  html {
+    font-size: 125%; /* Scale root base from 16px to 20px for comfortable readability across all pages */
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Rajdhani', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Scale up custom absolute tiny sizes to remain fully readable with root scaling */
+  [class*="text-[9px]"], [class*="text-[10px]"] {
+    font-size: 0.78rem !important; /* Scales 9px/10px up nicely */
+  }
+  [class*="text-[11px]"] {
+    font-size: 0.83rem !important; /* Scales 11px up nicely */
+  }
+  
+  /* Modern custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-color);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+  }
+}
+
+/* Custom glow borders and cyber-animations */
+.cyber-glow {
+  box-shadow: 0 0 15px var(--accent-glow);
+  transition: box-shadow 0.3s ease;
+}
+.cyber-glow-red {
+  box-shadow: 0 0 15px var(--accent-glow-red);
+  transition: box-shadow 0.3s ease;
+}
+.cyber-glow-green {
+  box-shadow: 0 0 15px var(--accent-glow-green);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Conic gradient rotating border circling animation */
+@keyframes rotate-border-conic {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cyber-animated-border-frame {
+  position: relative;
+  padding: 1.5px;
+  overflow: hidden;
+  border-radius: 0.75rem; /* rounded-xl (12px) */
+}
+
+.cyber-animated-border-beam {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 35%,
+    var(--accent-color) 50%,
+    transparent 65%
+  );
+  animation: rotate-border-conic 6s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── Page transition animation ─── */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Custom shake animation for credential errors */
+@keyframes cyber-shake {
+  0%, 100% { transform: translateX(0); }
+  15%, 45%, 75% { transform: translateX(-6px); }
+  30%, 60%, 90% { transform: translateX(6px); }
+}
+
+.animate-cyber-shake {
+  animation: cyber-shake 0.4s ease-in-out both;
+}
+
+/* Custom inject flash animation */
+@keyframes cyber-glow-flash {
+  0% {
+    box-shadow: 0 0 0px transparent;
+    border-color: var(--border-color);
+  }
+  20%, 60% {
+    box-shadow: 0 0 20px var(--accent-light), inset 0 0 10px rgba(26, 106, 255, 0.3);
+    border-color: var(--accent-color);
+  }
+  100% {
+    box-shadow: 0 0 0px transparent;
+    border-color: var(--border-color);
+  }
+}
+
+.animate-cyber-glow {
+  animation: cyber-glow-flash 1s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+.site-footer {
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at center, rgba(26, 106, 255, 0.08), transparent 45%),
+    var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--dim-color);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
