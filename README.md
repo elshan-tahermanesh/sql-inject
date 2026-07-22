@@ -805,20 +805,6 @@ The authors and contributors are not responsible for unauthorized or illegal use
 
 ---
 
-## 👨‍💻 Team
-
-| Name                        | Role                                   |
-| --------------------------- | -------------------------------------- |
-| Elshan Tahermanesh          | Project Lead and Frontend Development  |
-| Pratham Tatraiya            | Security Research and Attack Scenarios |
-| Ashwin Kumar Selvavinayagam | Database Design and Development        |
-| Pauline Meuer               | Backend Development                    |
-| Matthias Losch              | Backend Development                    |
-| Surbhi Mehto                | Documentation                          |
-| Muska Ijaz                  | Frontend Development                   |
-
----
-
 ## 🎓 Academic Project
 
 Developed as part of the **Cybersecurity course** at the **University of Rostock**.
