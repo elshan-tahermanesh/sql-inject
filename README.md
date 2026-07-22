@@ -13,10 +13,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/clecap/cs-2026-group-c">
-    <img src="https://img.shields.io/badge/GitHub-clecap%2Fcs--2026--group--c-181717?logo=github" alt="GitHub Repository">
+  <a href="https://github.com/elshan-tahermanesh/sql-inject">
+    <img src="https://img.shields.io/badge/GitHub-elshan--tahermanesh%2Fsql--inject-181717?logo=github" alt="GitHub Repository">
   </a>
-  <img src="https://img.shields.io/badge/Branch-master-blue" alt="Master Branch">
+  <img src="https://img.shields.io/badge/Branch-main-blue" alt="Master Branch">
   <img src="https://img.shields.io/badge/React-Frontend-61DAFB?logo=react" alt="React">
   <img src="https://img.shields.io/badge/Vite-Build_Tool-646CFF?logo=vite" alt="Vite">
   <img src="https://img.shields.io/badge/Flask-Backend-000000?logo=flask" alt="Flask">
@@ -358,10 +358,10 @@ For manual installation:
 
 ## 📥 Clone the Repository
 
-The repository uses the `master` branch.
+The repository uses the `main` branch.
 
 ```bash
-git clone --branch master https://github.com/clecap/cs-2026-group-c.git sql-inject
+git clone --branch main https://github.com/elshan-tahermanesh/sql-inject.git sql-inject
 ```
 
 Enter the project directory:
@@ -373,9 +373,9 @@ cd sql-inject
 You can also clone the repository first and then switch branches:
 
 ```bash
-git clone https://github.com/clecap/cs-2026-group-c.git sql-inject
+git clone https://github.com/elshan-tahermanesh/sql-inject.git sql-inject
 cd sql-inject
-git checkout master
+git checkout main
 ```
 
 ---
@@ -812,13 +812,13 @@ Developed as part of the **Cybersecurity course** at the **University of Rostock
 Repository:
 
 ```text
-https://github.com/clecap/cs-2026-group-c
+https://github.com/elshan-tahermanesh/sql-inject
 ```
 
 Primary branch:
 
 ```text
-master
+main
 ```
 
 ---
@@ -830,7 +830,7 @@ Contributions should be made through a separate branch.
 Create a new branch:
 
 ```bash
-git checkout master
+git checkout main
 git pull origin master
 git checkout -b feature/your-feature-name
 ```
@@ -848,7 +848,7 @@ Push the branch:
 git push origin feature/your-feature-name
 ```
 
-Then open a pull request into the `master` branch.
+Then open a pull request into the `main` branch.
 
 ---
 
@@ -865,7 +865,7 @@ Before reusing or redistributing the source code, review the repository's licens
 </p>
 
 <p align="center">
-  <a href="https://github.com/clecap/cs-2026-group-c">
+  <a href="https://github.com/elshan-tahermanesh/sql-inject">
     View the sql-inject repository on GitHub
   </a>
 </p>
